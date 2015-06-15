@@ -52,3 +52,11 @@ $ bin/rails generate rspec:install
 
 #setup rails helper for capy:
 require 'capybara/rails'
+
+When migrate migrate with both!:
+bin/rake db:migrate
+bin/rake db:migrate RAILS_ENV=test
+
+When you want to join two things together: e.g reviews to restaurants:
+
+bin/rails g migration AddRestaurantIdToReviews restaurant:belongs_to
