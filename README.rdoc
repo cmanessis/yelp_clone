@@ -34,7 +34,7 @@ $ gem install rails
 $ rails new yelp_clone -d postgresql -T
 $ bin/rails server
 $ bin/rails s
-$ bin/rake db:create / $ bin/rake db:create RAILS_ENV=
+$ bin/rake db:create / $ bin/rake db:create RAILS_ENV=test
 #add to gemfile:
 
 group :test do
