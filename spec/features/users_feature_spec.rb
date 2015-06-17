@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-feature "User can sign in and out" do
-  context "user not signed in and on the homepage" do
+feature 'User can sign in and out' do
+  context 'user not signed in and on the homepage' do
     it "should see a 'sign in' link and a 'sign up' link" do
       visit('/')
       expect(page).to have_link('Sign in')
@@ -14,7 +14,7 @@ feature "User can sign in and out" do
     end
   end
 
-  context "user signed in on the homepage" do
+  context 'user signed in on the homepage' do
     before do
       visit('/')
       click_link('Sign up')
@@ -33,6 +33,23 @@ feature "User can sign in and out" do
       visit('/')
       expect(page).not_to have_link('Sign in')
       expect(page).not_to have_link('Sign up')
+    end
+  end
+  context 'users cannot modify a restaurant unless they created it' do
+    before { Restaurant.create name: 'KFC' }
+    it 'cannot delete a restaurant unless they created it ' do
+      sign_up
+      visit '/restaurants'
+      click_link 'Delete KFC'
+      expect(page).to have_content 'KFC'
+      expect(page).not_to have_content 'Restaurant deleted successfully'
+    end
+    it 'cannot edit a restautant unless they created it' do
+      sign_up
+      visit '/restaurants'
+      click_link 'Edit KFC'
+      expect(page).to have_content 'KFC'
+      expect(current_path).to eq('/restaurants')
     end
   end
 end
